@@ -249,19 +249,19 @@
 
 
 <div style="text-align: center;">
-    <a class="btn btn-success btn-lg get-started-btn" href="#">Paper</a>
-    <a class="btn btn-primary btn-lg get-started-btn" href="#">Code</a>
+    <a class="btn btn-success btn-lg get-started-btn" href="https://arxiv.org/abs/2409.17687" target="_blank">Paper</a>
+    <a class="btn btn-primary btn-lg get-started-btn" href="https://github.com/structlearning/GraphEdX" target="_blank">Code</a>
     <a class="btn btn-warning btn-lg get-started-btn" href="#">Presentation</a>
-        <a class="btn btn-info btn-lg get-started-btn" href="#">Video</a>
+    <a class="btn btn-info btn-lg get-started-btn" href="#">Video</a>
   </div>
 
 <br>
 
 <div style="text-align: center;">
-    <a class="btn btn-outline-primary btn-lg get-started-btn" href="#">Definition</a>
-     <a class="btn btn-outline-primary btn-lg get-started-btn" href="#">GED with non-uniform costs</a>
-    <a class="btn btn-outline-primary btn-lg get-started-btn" href="#">GraphEdx</a>         
-        <a class="btn btn-outline-primary btn-lg get-started-btn" href="#">Results</a>         
+    <a class="btn btn-outline-primary btn-lg get-started-btn" href="#definition">Definition</a>
+     <a class="btn btn-outline-primary btn-lg get-started-btn" href="#non-uniform">GED with non-uniform costs</a>
+    <a class="btn btn-outline-primary btn-lg get-started-btn" href="#graphedx">GraphEdx</a>         
+        <a class="btn btn-outline-primary btn-lg get-started-btn" href="#results">Results</a>         
   </div>
 
 </header>
@@ -283,7 +283,7 @@
       
 <br>
  
-        <h2 class="post-title"> Definition of Graph Edit Distance</h2>
+        <h2 class="post-title" id="definition"> Definition of Graph Edit Distance</h2>
  
         
       <div class="post-entry">
@@ -348,7 +348,7 @@
 
  
  <span style="display:block; margin-top:10px;"> 
-        <h2 class="post-title"> GED with non-uniform costs</h2>
+        <h2 class="post-title" id="non-uniform"> GED with non-uniform costs</h2>
  </span>
         
       <div class="post-entry">
@@ -364,7 +364,7 @@ Let us consider only for operations: deletion and addition of nodes and edges. S
       </div>
       
  <span style="display:block; margin-top:10px;"> 
-        <h2 class="post-title"> GraphEdx surrogate</h2>
+        <h2 class="post-title" id="graphedx"> GraphEdx surrogate</h2>
  </span>
         
       <div class="post-entry">
@@ -455,7 +455,7 @@ underlying term. Hence, we write:
  \hspace{-2mm}   \edelsurr & =\sum_{\substack{e=(u,v) \\ e'=(u',v')}}\xorop{\adjs[u,v],\adjt[u',v']}\left\|\relu{\Eembs[e,:]-\Eembt[e',:]}\right\|_1 \Sb[e,e'], \label{eq:xor-1}  \\ 
   \hspace{-2mm}  \eaddsurr & =\sum_{\substack{e=(u,v) \\ e'=(u',v')}}\xorop{\adjs[u,v],\adjt[u',v']}\left\|\relu{\Eembt[e',:]-\Eembs[e,:]}\right\|_1 \Sb[e,e'].   \label{eq:xor-2}
 \end{align}
-Similarly, the cost contribution for node operations arises from mapping a padded node to a non-padded node or vice versa. We account for this by multiplying  \)J(\IsValid_{\Gs}[u], \IsValid_{\Gt}[u'])\) with each term of \(\ndelsurr\) and \(\naddsurr\) computed using \mms. 
+Similarly, the cost contribution for node operations arises from mapping a padded node to a non-padded node or vice versa. We account for this by multiplying  \(J(\IsValid_{\Gs}[u], \IsValid_{\Gt}[u'])\) with each term of \(\ndelsurr\) and \(\naddsurr\) computed using \(\mms\). 
 Hence, we compute
 \(\ndelsurr= \sum_{u,u'} J(\IsValid_{\Gs}[u], \IsValid_{\Gt}[u']) \left\|\relu{\Nembs[u,:]-\Nembt[u',:]}\right\|_1 \Pb[u,u']\) and \(\naddsurr=\sum_{u,u'}J(\IsValid_{\Gs}[u], \IsValid_{\Gt}[u'])\left\|\relu{\Nembt[u',:]-\Nembs[u,:]}\right\|_1 \Pb[u,u']\). 
       </div>
@@ -464,19 +464,37 @@ Hence, we compute
  
   
  
-       <div class="post-entry">
-      
+      <div class="post-entry">
+        <h2 class="post-title" id="results">Results </h2>
+        We compare our approach with nine state-of-the-art method for GED with both equal and unequal costs. For GED with equal (unequal) costs we have \( b_{\ominus}\) = \( b_{\oplus}\) = \(a_{\ominus} = a_{\oplus}\) = 1 (\( b_{\ominus}\) = 3, \( b_{\oplus}\) = 1, \(a_{\ominus} = 2, a_{\oplus}\) = 1).
+        <br>For GraphEdx, we select \(\edelsurr\), \(\eaddsurr\) and \(\ndelsurr\), \(\naddsurr\) from the cartesian space of \(\text{Edge}\)-{\(\msm\), \(\mms\), \(\xor\)} x \(\text{Edge}\)-{\(\msm\), \(\mms\), \(\xor\)} through cross validation.
 
-      
+        <h4>Comparison with baselines</h3>
+        <figure class="fig-container" id="baseline">
+          <img src="assets/img/result_baseline.jpeg" alt="Image from PDF" class="ImageBorder">
+          <figcaption>Table 1: Prediction error measured in terms of MSE of GraphEdx and baselines, for GED with equal costs and unequal costs. Green(yellow) numbers report the best (second best) performers.</figcaption>
+        </figure>
+        From <a href="#baseline"> Table 1 </a>, we make the following observations. (1) GraphEdx outperforms all the baselines by a significant
+        margin. For GED with equal costs, this margin often goes as high as 15%. This advantage becomes
+        even more pronounced for GED with unequal costs, where our method outperforms the baselines by
+        a margin as high as 30%.
 
- 
-        <h2 class="post-title">Results </h2>
- 
-        TBD
- 
-     </div>
+        <h4>Comparison across nine distances</h3>
+          Here, we compare among the nine different combinations of our neural distance surrogates. 
+          <figure class="fig-container" id="combination">
+          <img src="assets/img/result_comb.jpeg" alt="Image from PDF" class="ImageBorder", height="200px">
+          <figcaption>Table 2: Comparison among the nine neural distance combinations in terms of MSE. Green(yellow) numbers report the best (second best) performers.</figcaption>
+        </figure>
+        <a href="#baseline"> Table 2 </a> shows that the best combination mostly share the \(\xor\)
+        on the edge edit. This is because, \(\xor\) offers more inductive bias, by zeroing the edit cost
+        of aligning an edge to edge and a non-edge to non-edge.
 
 
+      </div>
+
+      <div class="post-entry">
+        <h3 class="post-title" id="contributors"> Contributors </h3>
+      </div>
 
 
 
